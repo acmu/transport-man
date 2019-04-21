@@ -7,7 +7,7 @@
 1. yarn
 2. React 16
 3. Redux
-4. React Router 4
+4. React Router 5
 5. Material UI
 6. eslint
 7. prettier
@@ -21,6 +21,18 @@
 todo:
 - eslint & pre
 - mongoose
+- saga
+- bundle.js 拆分
+
+## Usage
+
+
+```sh
+yarn
+
+# 开发环境
+yarn dev
+```
 
 
 ## 远程 git
@@ -79,6 +91,5 @@ yarn add axios lodash
 
 
 ```sh
-
 
 ```
