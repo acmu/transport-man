@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 const isDev = process.env.NODE_ENV === 'dev';
 
@@ -16,7 +17,7 @@ const baseConfig = {
     ],
   },
   resolve: {
-    extensions: ['.jsx', '.js'],
+    extensions: ['.jsx', '.js', '.json'],
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -35,7 +36,9 @@ if (isDev) {
     contentBase: './dist',
     port: 3000,
     historyApiFallback: true,
+    hot: true,
   };
+  baseConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 } else {
   // prod
 }
