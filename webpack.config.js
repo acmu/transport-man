@@ -49,6 +49,9 @@ if (isDev) {
       port: 3000,
       historyApiFallback: true,
       hot: true,
+      overlay: {
+        errors: true,
+      },
     },
     plugins: [new webpack.HotModuleReplacementPlugin()],
   });

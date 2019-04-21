@@ -1,4 +1,6 @@
-# 物流管理系统
+<h1 align="center">🚚 物流管理系统</h1>
+
+一个学习的项目
 
 ## 技术栈
 
@@ -13,6 +15,7 @@
 9. Koa 2
 10. mongoose
 11. lodash
+12. redux-saga
 
 
 todo:
@@ -65,9 +68,9 @@ yarn add --dev @babel/core babel-loader @babel/preset-env @babel/preset-react
 
 yarn add react react-dom
 
-yarn add --dev react-hot-loader
+yarn add --dev cross-env webpack-merge  husky
 
-yarn add --dev cross-env webpack-merge
+yarn add --dev react-hot-loader babel-eslint eslint eslint-plugin-react
 
 yarn add axios lodash
 
