@@ -7,7 +7,7 @@ class App extends React.Component {
 
     this.state = {
       n1: 10,
-      n2: 3000,
+      n2: 300,
     };
     this.handleN1 = this.handleN1.bind(this);
     this.handleN2 = this.handleN2.bind(this);
@@ -21,7 +21,7 @@ class App extends React.Component {
 
   handleN2() {
     this.setState({
-      n2: this.state.n2 + 1,
+      n2: this.state.n2 + 10,
     });
   }
 

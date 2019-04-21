@@ -3,8 +3,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
-import AppRoute from '../Route';
-import Tem from '../Tem';
+import AppRoute from '#components/Route';
+import Tem from '#components/Tem';
 
 function App() {
   return (

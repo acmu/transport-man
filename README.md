@@ -12,12 +12,12 @@
 8. axios
 9. Koa 2
 10. mongoose
+11. lodash
 
 
 todo:
-- hmr
-- route
-- redux
+- eslint & pre
+- mongoose
 
 
 ## 远程 git
