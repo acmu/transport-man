@@ -67,9 +67,9 @@ yarn add react react-dom
 
 yarn add --dev react-hot-loader
 
-yarn add --dev cross-env
+yarn add --dev cross-env webpack-merge
 
-yarn add axios
+yarn add axios lodash
 
 ```
 

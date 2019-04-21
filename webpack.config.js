@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const merge = require('webpack-merge');
 
 const isDev = process.env.NODE_ENV === 'dev';
 // alias floders under ./src
@@ -11,7 +12,7 @@ const aliasData = aliasList.reduce((acc, cur) => {
   return acc;
 }, {});
 
-const baseConfig = {
+let baseConfig = {
   mode: isDev ? 'development' : 'production',
   entry: './src/index.js',
   module: {
@@ -40,16 +41,22 @@ const baseConfig = {
 };
 
 if (isDev) {
-  baseConfig.devtool = 'cheap-module-eval-source-map';
-  baseConfig.devServer = {
-    contentBase: './dist',
-    port: 3000,
-    historyApiFallback: true,
-    hot: true,
-  };
-  baseConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+  // development
+  baseConfig = merge(baseConfig, {
+    devtool: 'cheap-module-eval-source-map',
+    devServer: {
+      contentBase: './dist',
+      port: 3000,
+      historyApiFallback: true,
+      hot: true,
+    },
+    plugins: [new webpack.HotModuleReplacementPlugin()],
+  });
 } else {
-  // prod
+  // production
+  baseConfig = merge(baseConfig, {
+    devtool: 'cheap-module-source-map',
+  });
 }
 
 module.exports = baseConfig;
