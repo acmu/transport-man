@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack-dev-server --config ./webpack.config.js",
+    "dev:build": "cross-env NODE_ENV=dev webpack --config ./webpack.config.js",
     "build": "cross-env NODE_ENV=prod  webpack --config ./webpack.config.js",
     "ser": "node ./server/index.js",
     "cle:dep": "rm -rf node_modules && rm yarn.lock",
