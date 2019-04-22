@@ -80,11 +80,13 @@ yarn add --dev @babel/core babel-loader @babel/preset-env @babel/preset-react
 
 yarn add react react-dom
 
-yarn add --dev cross-env webpack-merge  husky
+yarn add --dev cross-env webpack-merge husky eslint-plugin-prettier eslint-config-prettier
 
 yarn add --dev react-hot-loader babel-eslint eslint eslint-plugin-react
 
 yarn add axios lodash
+
+yarn add --dev --exact prettier
 
 ```
 
