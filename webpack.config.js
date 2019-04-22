@@ -18,14 +18,13 @@ let baseConfig = {
   module: {
     rules: [
       {
-        test: /.jsx?$/,
+        test: /.js$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
     ],
   },
   resolve: {
-    extensions: ['.jsx', '.js', '.json'],
     alias: aliasData,
   },
   output: {
@@ -35,6 +34,7 @@ let baseConfig = {
     chunkFilename: 'chunk_[name]_[hash].js',
   },
   optimization: {
+    usedExports: true,
     splitChunks: {
       chunks: 'all',
       minSize: 30000,

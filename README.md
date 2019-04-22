@@ -16,6 +16,7 @@
 10. mongoose
 11. lodash
 12. redux-saga
+13. recharts
 
 
 todo:
@@ -84,14 +85,20 @@ yarn add --dev cross-env webpack-merge husky eslint-plugin-prettier eslint-confi
 
 yarn add --dev react-hot-loader babel-eslint eslint eslint-plugin-react
 
-yarn add axios lodash
+yarn add axios lodash classnames recharts
 
 yarn add --dev --exact prettier
+
+yarn add --dev @babel/plugin-proposal-class-properties @babel/plugin-syntax-dynamic-import @babel/plugin-proposal-decorators
 
 ```
 
 
 
-```sh
+```js
+
+// eslint-disable-line prettier/prettier
+
+<!-- prettier-ignore -->
 
 ```

@@ -26,5 +26,7 @@ module.exports = {
     'prettier/prettier': 'error',
     'no-console': 'warn',
     'no-debugger': 'warn',
+    // 类成员之间加空行
+    'lines-between-class-members': ['error', 'always'],
   },
 };

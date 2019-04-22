@@ -7,23 +7,19 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from '#flux/root/reducer';
 
-import App from './components/App';
-import HmrTest from '#components/HMR';
-import ReduxDemo from '#components/reduxDemo/App';
+import AppRoute from '#containers/AppRoute';
 
-/* eslint-disable no-underscore-dangle */
 const store = createStore(
   rootReducer /* preloadedState, */,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  // 暂时停止 redux 扩展
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
-/* eslint-enable */
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <CssBaseline />
-      <HmrTest />
-      <ReduxDemo />
+      <AppRoute />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
