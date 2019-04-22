@@ -4,7 +4,11 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:prettier/recommended',
+    'plugin:react/recommended',
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -17,7 +21,9 @@ module.exports = {
     sourceType: 'module',
   },
   parser: 'babel-eslint',
+  plugins: ['prettier'],
   rules: {
+    'prettier/prettier': 'error',
     // 缩进 2 个空格 SwitchCase 也缩进2个空格
     indent: ['error', 2, { SwitchCase: 1 }],
     // 总是使用单引号
