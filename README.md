@@ -91,6 +91,12 @@ yarn add --dev --exact prettier
 
 yarn add --dev @babel/plugin-proposal-class-properties @babel/plugin-syntax-dynamic-import @babel/plugin-proposal-decorators
 
+# 更换 antd
+
+yarn add antd
+
+yarn add --dev less less-loader style-loader css-loader babel-plugin-import 
+
 ```
 
 

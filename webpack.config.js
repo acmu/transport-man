@@ -22,6 +22,14 @@ let baseConfig = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
+      {
+        test: /.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /.less$/,
+        use: ['style-loader', 'css-loader', 'less-loader'],
+      },
     ],
   },
   resolve: {
@@ -31,7 +39,7 @@ let baseConfig = {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
     filename: '[name]_[hash].js',
-    chunkFilename: 'chunk_[name]_[hash].js',
+    chunkFilename: 'chunk_[name]_[contenthash].js',
   },
   optimization: {
     usedExports: true,

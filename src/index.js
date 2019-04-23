@@ -1,7 +1,6 @@
 import 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -18,7 +17,6 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <CssBaseline />
       <AppRoute />
     </BrowserRouter>
   </Provider>,

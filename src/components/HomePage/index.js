@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import Dashboard from './Dashboard';
+import { DatePicker } from 'antd';
 
 export default class index extends Component {
   render() {
     return (
       <div>
-        <Dashboard />
+        <p>sdfsd</p>
+        <DatePicker />
       </div>
     );
   }

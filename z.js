@@ -1,10 +1,25 @@
-const path = require('path');
-const aliasList = ['components', 'containers', 'flux'];
+const a = async () => {
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res(1);
+    }, 1000);
+  });
+};
 
-const srcPath = p => path.join(__dirname, 'src', p);
-const aliasData = aliasList.reduce((acc, cur) => {
-  acc[`#${cur}`] = srcPath(cur);
-  return acc;
-}, {});
+const b = async () => {
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res(2);
+    }, 1000);
+  });
+};
 
-console.log(aliasData);
+const c = async () => {
+  console.log('object');
+  const x = await a();
+  console.log(x, '--');
+  const y = await b();
+  console.log(y, '-=0-');
+};
+
+c();
