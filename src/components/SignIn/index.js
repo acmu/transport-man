@@ -9,24 +9,20 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Snackbar from '@material-ui/core/Snackbar';
 import { styles } from './styles';
+import withRedirect from '#components/hoc/withRedirect';
 
 class SignIn extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-  };
-
-  static contextTypes = {
-    router: PropTypes.object,
-  };
-
-  redirectToTarget = () => {
-    this.context.router.history.push(`/target`);
+    history: PropTypes.object.isRequired,
   };
 
   state = {
     uName: 'sd',
     pWord: 'xvc',
+    snackbar: false,
   };
 
   handleFromSubmit = e => {
@@ -34,6 +30,17 @@ class SignIn extends Component {
     const { pWord, uName } = this.state;
 
     console.log(`${uName} - ${pWord}`);
+
+    const { history } = this.props;
+
+    if (pWord === '123') {
+      history.push('/');
+    } else {
+      this.setState({
+        snackbar: true,
+      });
+    }
+    // history.replace('/');
   };
 
   handleChangeState = (stateName, event) => {
@@ -43,9 +50,13 @@ class SignIn extends Component {
     });
   };
 
+  handleClose = () => {
+    this.setState({ snackbar: false });
+  };
+
   render() {
     const { classes } = this.props;
-    const { pWord, uName } = this.state;
+    const { pWord, uName, snackbar } = this.state;
 
     return (
       <main className={classes.main}>
@@ -83,9 +94,17 @@ class SignIn extends Component {
             >
               提 交
             </Button>
-            <Button onClick={this.redirectToTarget}>te</Button>
           </form>
         </Paper>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={snackbar}
+          onClose={this.handleClose}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id='message-id'>您输入的用户名或密码错误！</span>}
+        />
       </main>
     );
   }
