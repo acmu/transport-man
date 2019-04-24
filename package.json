@@ -12,7 +12,7 @@
     "prettify": "prettier --write \"src/**/*.js\"",
     "temp": "prettier --check \"src/**/*.js\""
   },
-  "author": "Xio Min (https://gitee.com/wen98y)",
+  "author": "Xio Min",
   "license": "MIT",
   "husky": {
     "hooks": {
@@ -51,7 +51,6 @@
     "antd": "^3.16.5",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
-    "koa": "^2.7.0",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -59,7 +58,6 @@
     "react-hot-loader": "^4.8.4",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
-    "recharts": "^1.5.0",
     "redux": "^4.0.1"
   }
 }

@@ -4,8 +4,12 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 
 const isDev = process.env.NODE_ENV === 'dev';
+
 // alias floders under ./src
-const aliasList = ['components', 'containers', 'flux'];
+const aliasList = ['components', 'containers', 'flux', 'api', 'util'];
+
+// 是否代理到 mock
+const isMock = false;
 
 const aliasData = aliasList.reduce((acc, cur) => {
   acc[`#${cur}`] = path.join(__dirname, 'src', cur);
@@ -83,6 +87,16 @@ if (isDev) {
       hot: true,
       overlay: {
         errors: true,
+      },
+      proxy: {
+        // 代理到本地 koa 服务器 或 easy mock 服务器
+        '/api': {
+          target: isMock
+            ? 'https://www.easy-mock.com/mock/5c5c36d10e421d0a8e55a939'
+            : 'http://localhost:3001/api',
+          secure: false,
+          changeOrigin: true,
+        },
       },
     },
     plugins: [new webpack.HotModuleReplacementPlugin()],

@@ -5,6 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from '#flux/root/reducer';
+import { LocaleProvider } from 'antd';
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
 
 import AppRoute from '#containers/AppRoute';
 
@@ -16,9 +18,11 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <AppRoute />
-    </BrowserRouter>
+    <LocaleProvider locale={zh_CN}>
+      <BrowserRouter>
+        <AppRoute />
+      </BrowserRouter>
+    </LocaleProvider>
   </Provider>,
   document.getElementById('root'),
 );
