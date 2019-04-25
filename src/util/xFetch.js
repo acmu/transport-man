@@ -1,34 +1,37 @@
 import axios from 'axios';
+import { message } from 'antd';
 
-const xFetch = str => ({ params = {}, suc = f => f, err = f => f, fin } = {}) => {
-  if (typeof str === 'string') {
-    axios
-      .get(str, { params })
-      .then(res => res.data)
-      .then(data => {
-        if (data.code === 1) {
-          suc(data);
-        } else {
-          err(data);
-        }
-      })
-      .catch(e => err({ msg: `xFetch prompt: ${e}` }))
-      .finally(fin);
-    return;
-  }
-
-  axios
-    .post(str[0], { ...params })
+const processData = (prom, m, suc, err, fin) => {
+  prom
     .then(res => res.data)
     .then(data => {
+      /* eslint-disable */
+      console.group('X-FETCH');
+      console.log(data);
+      console.groupEnd();
+      /* eslint-enable */
+
       if (data.code === 1) {
         suc(data);
       } else {
         err(data);
       }
     })
-    .catch(e => err({ msg: `xFetch prompt: ${e}` }))
+    .catch(e => message.error({ msg: `${m} xFetch :( ${e}` }))
     .finally(fin);
+};
+
+const xFetch = str => ({
+  params = {},
+  suc = v => message.success(v.msg),
+  err = e => message.error(e.msg),
+  fin = f => f,
+} = {}) => {
+  if (typeof str === 'string') {
+    processData(axios.get(str, { params }), 'GET', suc, err, fin);
+    return;
+  }
+  processData(axios.post(str[0], { ...params }), 'POST', suc, err, fin);
 };
 
 export default xFetch;

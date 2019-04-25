@@ -8,15 +8,13 @@
 2. React 16
 3. Redux
 4. React Router 5
-5. Material UI
+5. antd
 6. eslint
 7. prettier
 8. axios
-9. Koa 2
-10. mongoose
-11. lodash
-12. redux-saga
-13. recharts
+9.  mongoose
+10. lodash
+11. redux-saga
 
 
 todo:
@@ -95,7 +93,9 @@ yarn add --dev @babel/plugin-proposal-class-properties @babel/plugin-syntax-dyna
 
 yarn add antd
 
-yarn add --dev less less-loader style-loader css-loader babel-plugin-import 
+yarn add --dev less less-loader style-loader css-loader babel-plugin-import
+
+# 还可以加 immutable redux-actions
 
 ```
 

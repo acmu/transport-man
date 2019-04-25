@@ -8,7 +8,6 @@ class RegisterModal extends Component {
   static propTypes = {
     visible: PropTypes.bool.isRequired,
     toggleSignModal: PropTypes.func.isRequired,
-    handleSigned: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
   };
 
@@ -20,7 +19,6 @@ class RegisterModal extends Component {
     const {
       form: { validateFields },
       toggleSignModal,
-      handleSigned,
     } = this.props;
 
     validateFields((err, values) => {
@@ -31,7 +29,6 @@ class RegisterModal extends Component {
           suc: data => {
             message.success(data.msg);
             toggleSignModal();
-            handleSigned();
           },
           err: data => {
             message.error(data.msg);

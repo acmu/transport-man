@@ -8,7 +8,8 @@ class SignModal extends Component {
   static propTypes = {
     visible: PropTypes.bool.isRequired,
     toggleSignModal: PropTypes.func.isRequired,
-    handleSigned: PropTypes.func.isRequired,
+    changeSign: PropTypes.func.isRequired,
+    userSignIn: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
   };
 
@@ -20,7 +21,7 @@ class SignModal extends Component {
     const {
       form: { validateFields },
       toggleSignModal,
-      handleSigned,
+      userSignIn,
     } = this.props;
 
     validateFields((err, values) => {
@@ -31,7 +32,7 @@ class SignModal extends Component {
           suc: data => {
             message.success(data.msg);
             toggleSignModal();
-            handleSigned();
+            userSignIn(data);
           },
           err: data => {
             message.error(data.msg);

@@ -18,7 +18,10 @@ const aliasData = aliasList.reduce((acc, cur) => {
 
 let baseConfig = {
   mode: isDev ? 'development' : 'production',
-  entry: './src/index.js',
+  entry: {
+    main: './src/index.js',
+    vendor: ['react', 'react-dom'],
+  },
   module: {
     rules: [
       {
@@ -27,12 +30,18 @@ let baseConfig = {
         use: ['babel-loader'],
       },
       {
-        test: /.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
         test: /.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              // 为 antd 的 style: true 即 less 加载
+              javascriptEnabled: true,
+            },
+          },
+        ],
       },
     ],
   },
@@ -79,7 +88,8 @@ let baseConfig = {
 if (isDev) {
   // development
   baseConfig = merge(baseConfig, {
-    devtool: 'cheap-module-eval-source-map',
+    // devtool: 'cheap-module-eval-source-map',
+    devtool: 'cheap-source-map',
     devServer: {
       contentBase: './dist',
       port: 3000,
@@ -93,7 +103,7 @@ if (isDev) {
         '/api': {
           target: isMock
             ? 'https://www.easy-mock.com/mock/5c5c36d10e421d0a8e55a939'
-            : 'http://localhost:3001/api',
+            : 'http://localhost:3001',
           secure: false,
           changeOrigin: true,
         },
