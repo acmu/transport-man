@@ -6,8 +6,8 @@ const processData = (prom, m, suc, err, fin) => {
     .then(res => res.data)
     .then(data => {
       /* eslint-disable */
-      console.group('X-FETCH');
-      console.log(data);
+      console.group('X-FETCH', data.code === 1 ? '✔️' : `❌ ${data.msg}`);
+      console.log(data.data);
       console.groupEnd();
       /* eslint-enable */
 

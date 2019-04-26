@@ -12,4 +12,16 @@ export default {
 
   // 检查登陆 & 获取用户信息
   CHECK_SIGN: '/api/checksigned',
+
+  // 检查登陆 & 获取用户信息
+  UPDATE_UESR: ['/api/updateuser'],
+
+  // 新建客户
+  ADD_CUSTOMER: ['/api/customer/add'],
+
+  // 客户列表
+  LIST_CUSTOMER: '/api/customer/list',
+
+  // 删除客户
+  DELETE_CUSTOMER: ['/api/customer/delete'],
 };

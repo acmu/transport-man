@@ -68,6 +68,7 @@ function withLayout(WrappedComponent) {
         ['home', '主页', '/'],
         ['user', '个人信息', '/userinfo'],
         ['file-text', '订单列表', '/orderlist'],
+        ['team', '客户列表', '/customerlist'],
       ];
     }
 
