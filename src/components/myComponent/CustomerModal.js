@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const CustomerModal = ({ visible, title, handleCancel, children }) => {
   return (
-    <Modal visible={visible} title={`${title}客户`} onCancel={handleCancel} footer={null}>
+    <Modal visible={visible} title={title} onCancel={handleCancel} footer={null}>
       {children}
     </Modal>
   );

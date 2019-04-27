@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import withLayout from '#components/withLayout';
 import { Button } from 'antd';
 
-import CustomerModal from './CustomerModal';
+import CustomerModal from '../myComponent/CustomerModal';
 import AddForm from './AddForm';
 import EditForm from './EditForm';
 import CustomerTable from './CustomerTable';
@@ -94,7 +94,7 @@ class CustomerList extends Component {
         <CustomerModal
           visible={visible}
           handleCancel={() => this.changeVisible(false)}
-          title={formType === ftConfig.ADD ? '新建' : '编辑'}
+          title={formType === ftConfig.ADD ? '新建客户' : '编辑客户'}
         >
           {visible &&
             (formType === ftConfig.ADD ? (

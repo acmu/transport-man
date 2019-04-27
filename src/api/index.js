@@ -20,3 +20,11 @@ export const xAddCustomer = xFetch(API.ADD_CUSTOMER);
 export const xListCustomer = xFetch(API.LIST_CUSTOMER);
 
 export const xDeleteCustomer = xFetch(API.DELETE_CUSTOMER);
+
+export const xUpdateCustomer = xFetch(API.UPDATE_CUSTOMER);
+
+export const xAddOrder = xFetch(API.ADD_ORDER);
+
+export const xUserName = xFetch(API.USER_NAME);
+
+export const xCustomerName = xFetch(API.CUSTOMER_NAME);

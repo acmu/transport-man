@@ -13,7 +13,7 @@ export default {
   // 检查登陆 & 获取用户信息
   CHECK_SIGN: '/api/checksigned',
 
-  // 检查登陆 & 获取用户信息
+  // 更新用户
   UPDATE_UESR: ['/api/updateuser'],
 
   // 新建客户
@@ -24,4 +24,16 @@ export default {
 
   // 删除客户
   DELETE_CUSTOMER: ['/api/customer/delete'],
+
+  // 更新客户
+  UPDATE_CUSTOMER: ['/api/customer/update'],
+
+  // 新建订单
+  ADD_ORDER: ['/api/order/add'],
+
+  // 获取用户姓名 和 id
+  CUSTOMER_NAME: '/api/customer/getname',
+
+  // 获取用户姓名 和 id
+  USER_NAME: '/api/user/getname',
 };

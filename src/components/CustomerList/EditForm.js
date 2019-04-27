@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, Input, message } from 'antd';
 
-import { xAddCustomer } from '#api';
+import { xUpdateCustomer } from '#api';
 import { optimizeParam } from '#util';
 
 class EditForm extends Component {
@@ -27,21 +27,24 @@ class EditForm extends Component {
     });
 
     validateFields((err, values) => {
-      const { handleCancel } = this.props;
+      const { handleCancel, editItemValue } = this.props;
       if (!err) {
         /**
          * @todo 编辑用户请求
          */
-        // xAddCustomer({
-        //   params: optimizeParam(values),
-        //   suc: data => {
-        //     this.setState({
-        //       loading: false,
-        //     });
-        //     message.success(data.msg);
-        //     handleCancel();
-        //   },
-        // });
+        xUpdateCustomer({
+          params: {
+            customerId: editItemValue.customerId,
+            ...optimizeParam(values),
+          },
+          suc: data => {
+            this.setState({
+              loading: false,
+            });
+            message.success(data.msg);
+            handleCancel();
+          },
+        });
       }
     });
   };

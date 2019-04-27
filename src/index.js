@@ -12,7 +12,7 @@ import AppRoute from '#containers/AppRoute';
 
 const store = createStore(
   rootReducer /* preloadedState, */,
-  // 暂时停止 redux 扩展
+  // redux 浏览器扩展
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 
