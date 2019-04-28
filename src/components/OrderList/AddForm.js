@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, Input, message } from 'antd';
+import { Button, Form, Input, message, Select } from 'antd';
 
-import { xAddCustomer } from '#api';
+import { xAddOrder } from '#api';
 import { optimizeParam } from '#util';
+
+const { Option } = Select;
 
 class AddForm extends Component {
   static propTypes = {
     form: PropTypes.object.isRequired,
     handleCancel: PropTypes.func.isRequired,
+    customerNames: PropTypes.array.isRequired,
+    userNames: PropTypes.array.isRequired,
   };
 
   state = {
@@ -27,7 +31,7 @@ class AddForm extends Component {
         this.setState({
           loading: true,
         });
-        xAddCustomer({
+        xAddOrder({
           params: optimizeParam(values),
           suc: data => {
             this.setState({
@@ -44,16 +48,14 @@ class AddForm extends Component {
   render() {
     const {
       form: { getFieldDecorator },
+      customerNames,
+      userNames,
     } = this.props;
 
     const list = [
       {
-        label: '姓名',
-        name: 'name',
-      },
-      {
-        label: '电话',
-        name: 'phone',
+        label: '商品种类',
+        name: 'productCategory',
       },
     ];
 
@@ -73,6 +75,32 @@ class AddForm extends Component {
             </Form.Item>
           );
         })}
+        <Form.Item label='配送员'>
+          {getFieldDecorator('deliveryUserId', {
+            rules: [{ required: true, message: `请选择配送员` }],
+          })(
+            <Select>
+              {userNames.map(v => (
+                <Option value={v.userId} key={v.userId}>
+                  {v.userName || v.account}
+                </Option>
+              ))}
+            </Select>,
+          )}
+        </Form.Item>
+        <Form.Item label='客户'>
+          {getFieldDecorator('customerId', {
+            rules: [{ required: true, message: `请选择客户` }],
+          })(
+            <Select>
+              {customerNames.map(v => (
+                <Option value={v.customerId} key={v.customerId}>
+                  {v.name}
+                </Option>
+              ))}
+            </Select>,
+          )}
+        </Form.Item>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Button type='primary' htmlType='submit' loading={this.state.loading}>
             提交

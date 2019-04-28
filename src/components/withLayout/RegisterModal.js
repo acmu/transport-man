@@ -52,6 +52,10 @@ class RegisterModal extends Component {
 
     const list = [
       {
+        label: '姓名',
+        name: 'userName',
+      },
+      {
         label: '账号',
         name: 'account',
       },
@@ -76,7 +80,7 @@ class RegisterModal extends Component {
       >
         <Form layout='vertical'>
           {list.map(v => {
-            const Com = v.name === 'account' ? <Input /> : <Input.Password />;
+            const Com = v.name.indexOf('password') === -1 ? <Input /> : <Input.Password />;
             return (
               <Form.Item label={v.label} key={v.name}>
                 {getFieldDecorator(v.name, {

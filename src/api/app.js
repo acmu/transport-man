@@ -31,6 +31,9 @@ export default {
   // 新建订单
   ADD_ORDER: ['/api/order/add'],
 
+  // 获取订单列表
+  LIST_ORDER: '/api/order/list',
+
   // 获取用户姓名 和 id
   CUSTOMER_NAME: '/api/customer/getname',
 
