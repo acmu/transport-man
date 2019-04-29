@@ -27,6 +27,14 @@ export const xAddOrder = xFetch(API.ADD_ORDER);
 
 export const xListOrder = xFetch(API.LIST_ORDER);
 
+export const xDeleteOrder = xFetch(API.DELETE_ORDER);
+
+export const xUpdateOrder = xFetch(API.UPDATE_ORDER);
+
 export const xUserName = xFetch(API.USER_NAME);
 
 export const xCustomerName = xFetch(API.CUSTOMER_NAME);
+
+export const xOneCustomer = xFetch(API.ONE_CUSTOMER);
+
+export const xOneUser = xFetch(API.ONE_USER);

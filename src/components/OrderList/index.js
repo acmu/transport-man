@@ -6,6 +6,7 @@ import CustomerModal from '../myComponent/CustomerModal';
 import { xUserName, xCustomerName, xListOrder } from '#api';
 import AddForm from './AddForm';
 import OrderTable from './OrderTable';
+import EditForm from './EditForm';
 
 const ftConfig = {
   ADD: 0,
@@ -31,8 +32,7 @@ class OrderList extends Component {
     });
   };
 
-  addOrder = () => {
-    this.changeVisible(true);
+  fetchNameOptions = () => {
     xUserName({
       suc: ({ data }) => {
         this.setState({
@@ -47,6 +47,14 @@ class OrderList extends Component {
         });
       },
     });
+  };
+
+  addOrder = () => {
+    this.setState({
+      formType: ftConfig.ADD,
+      visible: true,
+    });
+    this.fetchNameOptions();
   };
 
   getOrderList = params => {
@@ -73,8 +81,27 @@ class OrderList extends Component {
     this.getOrderList(page);
   };
 
+  editOrder = editItemValue => {
+    this.setState({
+      formType: ftConfig.EDIT,
+      visible: true,
+      editItemValue,
+    });
+    this.fetchNameOptions();
+  };
+
   render() {
-    const { visible, customerNames, userNames, loading, data, pageSize, currentPage } = this.state;
+    const {
+      visible,
+      customerNames,
+      userNames,
+      loading,
+      data,
+      pageSize,
+      currentPage,
+      formType,
+      editItemValue,
+    } = this.state;
     const page = { pageSize, currentPage };
     return (
       <Fragment>
@@ -89,52 +116,35 @@ class OrderList extends Component {
           loading={loading}
           data={data}
           page={page}
-          // editOrder={this.editOrder}
+          editOrder={this.editOrder}
         />
         <CustomerModal
           visible={visible}
           handleCancel={() => this.changeVisible(false)}
-          title={'新建订单'}
-        >
-          {visible && (
-            <AddForm
-              handleCancel={() => this.changeVisible(false)}
-              customerNames={customerNames}
-              userNames={userNames}
-            />
-          )}
-        </CustomerModal>
-        {/* <CustomerTable
-          getCustomerList={this.getCustomerList}
-          onPageChange={this.onPageChange}
-          loading={loading}
-          data={data}
-          page={page}
-          editCustomer={this.editCustomer}
-        />
-        <CustomerModal
-          visible={visible}
-          handleCancel={() => this.changeVisible(false)}
-          title={formType === ftConfig.ADD ? '新建' : '编辑'}
+          title={formType === ftConfig.ADD ? '新建订单' : '编辑订单'}
         >
           {visible &&
             (formType === ftConfig.ADD ? (
               <AddForm
                 handleCancel={() => {
                   this.changeVisible(false);
-                  this.getCustomerList(page);
+                  this.getOrderList(page);
                 }}
+                customerNames={customerNames}
+                userNames={userNames}
               />
             ) : (
               <EditForm
                 editItemValue={editItemValue}
                 handleCancel={() => {
                   this.changeVisible(false);
-                  this.getCustomerList(page);
+                  this.getOrderList(page);
                 }}
+                customerNames={customerNames}
+                userNames={userNames}
               />
             ))}
-        </CustomerModal> */}
+        </CustomerModal>
       </Fragment>
     );
   }

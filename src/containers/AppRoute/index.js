@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 
-import Content from '#components/Content';
+import HomePage from '#components/HomePage';
 import UserInfo from '#components/UserInfo';
 import OrderList from '#components/OrderList';
 import CustomerList from '#components/CustomerList';
@@ -9,7 +9,7 @@ import { hot } from 'react-hot-loader/root';
 
 const AppRoute = () => (
   <Switch>
-    <Route exact path='/' component={Content} />
+    <Route exact path='/' component={HomePage} />
     <Route exact path='/userinfo' component={UserInfo} />
     <Route exact path='/orderlist' component={OrderList} />
     <Route exact path='/customerlist' component={CustomerList} />

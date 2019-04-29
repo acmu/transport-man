@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, Input, message } from 'antd';
+import { Button, Form, Input, message, Select } from 'antd';
 
 import { xAddCustomer } from '#api';
 import { optimizeParam } from '#util';
+import { provinces } from '#util';
+
+const { Option } = Select;
 
 class AddForm extends Component {
   static propTypes = {
@@ -55,6 +58,14 @@ class AddForm extends Component {
         label: '电话',
         name: 'phone',
       },
+      {
+        label: '省份',
+        name: 'province',
+      },
+      {
+        label: '详细地址',
+        name: 'address',
+      },
     ];
 
     const formItemLayout = {
@@ -65,6 +76,23 @@ class AddForm extends Component {
     return (
       <Form layout='horizontal' {...formItemLayout} onSubmit={this.submit}>
         {list.map(v => {
+          if (v.name === 'province') {
+            return (
+              <Form.Item label={v.label} key={v.name}>
+                {getFieldDecorator(v.name, {
+                  rules: [{ required: true, message: `请输入${v.label}` }],
+                })(
+                  <Select>
+                    {provinces.map(v => (
+                      <Option value={v.name} key={v.name}>
+                        {v.name}
+                      </Option>
+                    ))}
+                  </Select>,
+                )}
+              </Form.Item>
+            );
+          }
           return (
             <Form.Item label={v.label} key={v.name}>
               {getFieldDecorator(v.name, {

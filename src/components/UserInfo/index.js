@@ -39,8 +39,11 @@ class UserInfo extends Component {
         <Form.Item label='账号' style={{ textAlign: 'left' }}>
           <span>{userInfo.account}</span>
         </Form.Item>
-        <Form.Item label='昵称'>
-          {getFieldDecorator('userName', { initialValue: userInfo.userName })(<Input />)}
+        <Form.Item label='姓名'>
+          {getFieldDecorator('userName', {
+            rules: [{ required: true, message: '请输入姓名' }],
+            initialValue: userInfo.userName,
+          })(<Input />)}
         </Form.Item>
         <Form.Item label='邮箱'>
           {getFieldDecorator('email', { initialValue: userInfo.email })(<Input />)}

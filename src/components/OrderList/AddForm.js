@@ -81,7 +81,7 @@ class AddForm extends Component {
           })(
             <Select>
               {userNames.map(v => (
-                <Option value={v.userId} key={v.userId}>
+                <Option value={`${v.userId}@${v.userName}`} key={v.userId}>
                   {v.userName || v.account}
                 </Option>
               ))}
@@ -94,7 +94,7 @@ class AddForm extends Component {
           })(
             <Select>
               {customerNames.map(v => (
-                <Option value={v.customerId} key={v.customerId}>
+                <Option value={`${v.customerId}@${v.name}`} key={v.customerId}>
                   {v.name}
                 </Option>
               ))}

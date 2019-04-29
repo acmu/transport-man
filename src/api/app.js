@@ -34,9 +34,21 @@ export default {
   // 获取订单列表
   LIST_ORDER: '/api/order/list',
 
+  // 删除订单
+  DELETE_ORDER: ['/api/order/delete'],
+
+  // 更新订单
+  UPDATE_ORDER: ['/api/order/update'],
+
   // 获取用户姓名 和 id
   CUSTOMER_NAME: '/api/customer/getname',
 
   // 获取用户姓名 和 id
   USER_NAME: '/api/user/getname',
+
+  // 获取1个客户
+  ONE_CUSTOMER: '/api/customer/getone',
+
+  // 获取1个用户
+  ONE_USER: '/api/user/getone',
 };
