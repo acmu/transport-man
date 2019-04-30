@@ -1,17 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Button, Popconfirm, Tooltip, Tag } from 'antd';
+import { connect } from 'react-redux';
 
 import { xDeleteOrder } from '#api';
 import CustomerModal from '../myComponent/CustomerModal';
 import ShowCustomer from './ShowCustomer';
 import ShowUser from './ShowUser';
-
-const StatusConfig = [
-  { text: '已派发', color: 'geekblue' },
-  { text: '送货中', color: 'volcano' },
-  { text: '已签收', color: 'green' },
-];
+import { StatusConfig } from './config';
 
 const formatTime = s => {
   const arr = s.split('/');
@@ -23,7 +19,7 @@ const ftConfig = {
   CUSTOMER: 1,
 };
 
-export default class CustomerTable extends Component {
+class CustomerTable extends Component {
   static propTypes = {
     getOrderList: PropTypes.func.isRequired,
     onPageChange: PropTypes.func.isRequired,
@@ -31,6 +27,7 @@ export default class CustomerTable extends Component {
     data: PropTypes.object.isRequired,
     page: PropTypes.object.isRequired,
     editOrder: PropTypes.func.isRequired,
+    userInfo: PropTypes.object.isRequired,
   };
 
   state = {
@@ -63,12 +60,13 @@ export default class CustomerTable extends Component {
   };
 
   get columns() {
-    return [
+    const { userInfo } = this.props;
+    const list = [
       {
         title: '订单编号',
         dataIndex: 'orderId',
         key: 'orderId',
-        render: text => <span style={{ color: '#3498db' }}>{text.slice(0, 6)}</span>,
+        render: text => <span style={{ color: 'rgb(248, 115, 27)' }}>{text.slice(0, 6)}</span>,
       },
       {
         title: '订单状态',
@@ -127,6 +125,19 @@ export default class CustomerTable extends Component {
         },
       },
       {
+        title: '更新时间',
+        dataIndex: 'updatedAt',
+        key: 'updatedAt',
+        render: text => {
+          const tmp = formatTime(new Date(text).toLocaleString());
+          return (
+            <Tooltip title={tmp}>
+              <span>{tmp.slice(5, -3)}</span>
+            </Tooltip>
+          );
+        },
+      },
+      {
         title: '商品种类',
         dataIndex: 'productCategory',
         key: 'productCategory',
@@ -151,6 +162,26 @@ export default class CustomerTable extends Component {
         },
       },
     ];
+
+    if (!userInfo.isAdmin) {
+      list.pop();
+      list.push({
+        title: '操作',
+        dataIndex: 'name',
+        key: 'operate',
+        render: (_, record) => {
+          return (
+            <Fragment>
+              <Button icon='edit' type='dashed' onClick={() => this.rowEdit(record)} size='small'>
+                编辑
+              </Button>
+            </Fragment>
+          );
+        },
+      });
+    }
+
+    return list;
   }
 
   rowEdit = record => {
@@ -204,3 +235,7 @@ export default class CustomerTable extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ userInfo }) => ({ userInfo });
+
+export default connect(mapStateToProps)(CustomerTable);

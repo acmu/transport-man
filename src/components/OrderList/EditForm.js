@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, Input, message, Select } from 'antd';
+import { connect } from 'react-redux';
 
 import { xUpdateOrder } from '#api';
 import { optimizeParam } from '#util';
+import { StatusConfig } from './config';
 
 const { Option } = Select;
 
@@ -14,6 +16,7 @@ class EditForm extends Component {
     handleCancel: PropTypes.func.isRequired,
     customerNames: PropTypes.array.isRequired,
     userNames: PropTypes.array.isRequired,
+    userInfo: PropTypes.object.isRequired,
   };
 
   state = {
@@ -50,7 +53,7 @@ class EditForm extends Component {
     });
   };
 
-  render() {
+  renderAdmin = () => {
     const {
       form: { getFieldDecorator },
       editItemValue,
@@ -125,7 +128,74 @@ class EditForm extends Component {
         </div>
       </Form>
     );
+  };
+
+  renderNormal = () => {
+    const {
+      form: { getFieldDecorator },
+      editItemValue,
+      customerNames,
+      userNames,
+    } = this.props;
+
+    const list = [
+      {
+        label: '所在位置',
+        name: 'location',
+        required: true,
+      },
+    ];
+
+    const formItemLayout = {
+      labelCol: { span: 5 },
+      wrapperCol: { span: 16 },
+    };
+
+    return (
+      <Form layout='horizontal' {...formItemLayout} onSubmit={this.submit}>
+        {list.map(v => {
+          return (
+            <Form.Item label={v.label} key={v.name}>
+              {getFieldDecorator(v.name, {
+                rules: [{ required: v.required, message: `请输入${v.label}` }],
+                initialValue: editItemValue[v.name],
+              })(<Input autoComplete='off' />)}
+            </Form.Item>
+          );
+        })}
+
+        <Form.Item label='订单状态'>
+          {getFieldDecorator('status', {
+            rules: [{ required: true, message: `请选择订单状态` }],
+            initialValue: editItemValue.status,
+          })(
+            <Select>
+              {StatusConfig.map(v => (
+                <Option value={v.idx} key={v.idx}>
+                  {v.text}
+                </Option>
+              ))}
+            </Select>,
+          )}
+        </Form.Item>
+
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Button type='primary' htmlType='submit' loading={this.state.loading}>
+            提交
+          </Button>
+        </div>
+      </Form>
+    );
+  };
+
+  render() {
+    const {
+      userInfo: { isAdmin },
+    } = this.props;
+    return isAdmin ? this.renderAdmin() : this.renderNormal();
   }
 }
 
-export default Form.create()(EditForm);
+const mapStateToProps = ({ userInfo }) => ({ userInfo });
+
+export default connect(mapStateToProps)(Form.create()(EditForm));

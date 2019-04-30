@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Button, Popconfirm } from 'antd';
+import { connect } from 'react-redux';
 
 import { xDeleteCustomer } from '#api';
 
-export default class CustomerTable extends Component {
+class CustomerTable extends Component {
   static propTypes = {
     getCustomerList: PropTypes.func.isRequired,
     onPageChange: PropTypes.func.isRequired,
@@ -12,6 +13,7 @@ export default class CustomerTable extends Component {
     data: PropTypes.object.isRequired,
     page: PropTypes.object.isRequired,
     editCustomer: PropTypes.func.isRequired,
+    userInfo: PropTypes.object.isRequired,
   };
 
   fetchList = () => {
@@ -24,7 +26,8 @@ export default class CustomerTable extends Component {
   }
 
   get columns() {
-    return [
+    const { userInfo } = this.props;
+    const list = [
       {
         title: '姓名',
         dataIndex: 'name',
@@ -51,7 +54,9 @@ export default class CustomerTable extends Component {
         dataIndex: 'email',
         key: 'email',
       },
-      {
+    ];
+    if (userInfo.isAdmin) {
+      list.push({
         title: '操作',
         dataIndex: 'name',
         key: 'operate',
@@ -72,8 +77,9 @@ export default class CustomerTable extends Component {
             </Fragment>
           );
         },
-      },
-    ];
+      });
+    }
+    return list;
   }
 
   rowEdit = record => {
@@ -112,3 +118,11 @@ export default class CustomerTable extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ userInfo }) => {
+  return {
+    userInfo,
+  };
+};
+
+export default connect(mapStateToProps)(CustomerTable);

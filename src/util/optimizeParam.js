@@ -6,7 +6,7 @@ const optimizeParam = obj => {
   // 对象内 string 删去空格
   const newObj = {};
   Object.keys(obj).forEach(v => {
-    newObj[v] = obj[v] && obj[v].trim();
+    newObj[v] = typeof obj[v] === 'string' ? obj[v].trim() : obj[v];
   });
   return newObj;
 };
